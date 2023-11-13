@@ -3,10 +3,12 @@
         <div class="yugioh-secondary p-4">
             <h4 class="text-light">Found {{ store.cardsList.length }} cards</h4>
         </div>
-        <div class="row">
+        <div class="row row-cols-md-5  ">
             <CardPrinter v-for="card in store.cardsList" :image="card.card_images[0].image_url" :name="card.name"
                 :archetype="card.archetype" />
         </div>
+
+
     </div>
 </template>
 

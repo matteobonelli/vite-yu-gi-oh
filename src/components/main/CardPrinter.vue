@@ -1,5 +1,5 @@
 <template>
-    <div class="col-12 col-md-2 mb-3 ">
+    <div class=" col-12 mb-3 ">
         <img :src="image" :alt="name">
         <div class="text-center p-2">
             <h4 class="text-light mb-3">{{ name }}</h4>
