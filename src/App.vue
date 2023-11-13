@@ -1,11 +1,15 @@
 <template>
-  <HeaderComponent />
-  <main>
-    <MainComponent />
-  </main>
+  <LoadingScreen v-if="loaded === true" />
+  <div v-show="loaded === false">
+    <HeaderComponent />
+    <main>
+      <MainComponent />
+    </main>
+  </div>
 </template>
 
 <script>
+import LoadingScreen from './components/LoadingScreen.vue'
 import MainComponent from './components/MainComponent.vue';
 import { store } from './data/store';
 import axios from 'axios';
@@ -14,10 +18,12 @@ export default {
   name: 'App',
   components: {
     HeaderComponent,
-    MainComponent
+    MainComponent,
+    LoadingScreen
   },
   data() {
     return {
+      loaded: true,
       store
     }
   },
@@ -26,6 +32,10 @@ export default {
       const url = store.apiUrl + store.endPointApi
       axios.get(url).then((resp) => {
         store.cardsList = resp.data.data
+      }).catch((error) => {
+        console.log(error)
+      }).finally(() => {
+        this.loaded = false
       })
     }
   },
