@@ -2,7 +2,7 @@
   <LoadingScreen v-if="loaded === true" />
   <div v-show="loaded === false">
     <HeaderComponent />
-    <main>
+    <main class="py-5">
       <MainComponent />
     </main>
   </div>
