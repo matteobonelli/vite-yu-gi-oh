@@ -2,7 +2,7 @@
   <LoadingScreen v-if="loaded === true" />
   <div>
     <HeaderComponent />
-    <main class="py-5">
+    <main class="py-5" :class="{ 'main-height': store.cardsList.length <= 5 }">
       <SelectComponent @archetype-selector="getArchetype" />
       <MainComponent />
     </main>
@@ -80,5 +80,9 @@ export default {
 
 main {
   background-color: $primary_color ;
+}
+
+.main-height {
+  height: calc(100vh - 85px);
 }
 </style>
