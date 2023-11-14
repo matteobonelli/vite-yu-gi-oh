@@ -31,7 +31,7 @@ export default {
       params: {
         num: 50,
         offset: 0,
-      }
+      },
     }
   },
   methods: {
@@ -45,25 +45,32 @@ export default {
 
     },
     getCards() {
-      const url = store.apiUrl + store.endPointApi
-      axios.get(url, { params: this.params }).then((resp) => {
+      axios.get(store.apiUrl + store.endPointApi, { params: this.params }).then((resp) => {
         store.cardsList = resp.data.data
+      })
+    },
+
+  },
+  created() {
+    function getCardsURL() {
+      return axios.get(store.apiUrl + store.endPointApi, { params: { num: 50, offset: 0 } });
+    }
+
+    function getArchetypesURL() {
+      return axios.get(store.archetypesUrl);
+    }
+
+    Promise.all([getCardsURL(), getArchetypesURL()])
+      .then(function (results) {
+        store.cardsList = results[0].data.data
+        store.archetypesList = results[1].data
+        // console.log(store.cardsList)
+        // console.log(store.archetypesList)
       }).catch((error) => {
         console.log(error)
       }).finally(() => {
         this.loaded = false
-      })
-    },
-    getArchetypes() {
-      axios.get(store.archetypesUrl).then((resp) => {
-        store.archetypesList = resp.data
-      })
-    }
-
-  },
-  created() {
-    this.getCards()
-    this.getArchetypes()
+      });
   }
 }
 </script>
