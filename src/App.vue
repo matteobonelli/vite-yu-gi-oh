@@ -29,7 +29,7 @@ export default {
       loaded: true,
       store,
       params: {
-        num: 39,
+        num: 50,
         offset: 0,
       }
     }
