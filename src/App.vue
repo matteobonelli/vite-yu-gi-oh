@@ -47,7 +47,11 @@ export default {
     getCards() {
       axios.get(store.apiUrl + store.endPointApi, { params: this.params }).then((resp) => {
         store.cardsList = resp.data.data
-      })
+      }).catch((error) => {
+        console.log(error)
+      }).finally(() => {
+        this.loaded = false
+      });
     },
 
   },
