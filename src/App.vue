@@ -28,24 +28,20 @@ export default {
     return {
       loaded: true,
       store,
-      params: {
-        num: 50,
-        offset: 0,
-      },
     }
   },
   methods: {
     getArchetype(value) {
       if (value) {
-        this.params.archetype = value
+        store.params.archetype = value
       } else {
-        this.params.archetype = null
+        store.params.archetype = null
       }
       this.getCards()
 
     },
     getCards() {
-      axios.get(store.apiUrl + store.endPointApi, { params: this.params }).then((resp) => {
+      axios.get(store.apiUrl + store.endPointApi, { params: store.params }).then((resp) => {
         store.cardsList = resp.data.data
       }).catch((error) => {
         console.log(error)
@@ -57,7 +53,7 @@ export default {
   },
   created() {
     function getCardsURL() {
-      return axios.get(store.apiUrl + store.endPointApi, { params: { num: 50, offset: 0 } });
+      return axios.get(store.apiUrl + store.endPointApi, { params: store.params });
     }
 
     function getArchetypesURL() {

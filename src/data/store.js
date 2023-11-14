@@ -5,5 +5,9 @@ export const store = reactive({
     endPointApi: 'cardinfo.php',
     archetypesUrl: 'https://db.ygoprodeck.com/api/v7/archetypes.php',
     cardsList: [],
-    archetypesList: []
+    archetypesList: [],
+    params: {
+        num: 50,
+        offset: 0,
+    }
 })

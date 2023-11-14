@@ -20,4 +20,10 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+select {
+    width: 150px;
+    height: 35px;
+    border-color: rgba($color: #000000, $alpha: 0.3);
+}
+</style>
