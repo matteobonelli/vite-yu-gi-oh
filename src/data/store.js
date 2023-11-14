@@ -7,7 +7,7 @@ export const store = reactive({
     cardsList: [],
     archetypesList: [],
     params: {
-        num: 50,
+        num: 100,
         offset: 0,
     }
 })

@@ -1,6 +1,6 @@
 <template>
   <LoadingScreen v-if="loaded === true" />
-  <div v-else>
+  <div>
     <HeaderComponent />
     <main class="py-5">
       <SelectComponent @archetype-selector="getArchetype" />
