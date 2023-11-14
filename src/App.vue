@@ -1,14 +1,16 @@
 <template>
   <LoadingScreen v-if="loaded === true" />
-  <div v-show="loaded === false">
+  <div v-else>
     <HeaderComponent />
     <main class="py-5">
+      <SelectComponent @archetype-selector="getArchetype" />
       <MainComponent />
     </main>
   </div>
 </template>
 
 <script>
+import SelectComponent from './components/SelectComponent.vue';
 import LoadingScreen from './components/LoadingScreen.vue'
 import MainComponent from './components/MainComponent.vue';
 import { store } from './data/store';
@@ -19,25 +21,41 @@ export default {
   components: {
     HeaderComponent,
     MainComponent,
-    LoadingScreen
+    LoadingScreen,
+    SelectComponent
   },
   data() {
     return {
       loaded: true,
-      store
+      store,
+      params: {
+        num: 39,
+        offset: 0,
+      }
     }
   },
   methods: {
+    getArchetype(value) {
+      if (value) {
+        this.params.archetype = value
+        console.log(this.params)
+      } else {
+        this.params.archetype = null
+      }
+      this.getCards()
+
+    },
     getCards() {
       const url = store.apiUrl + store.endPointApi
-      axios.get(url).then((resp) => {
+      axios.get(url, { params: this.params }).then((resp) => {
         store.cardsList = resp.data.data
       }).catch((error) => {
         console.log(error)
       }).finally(() => {
         this.loaded = false
       })
-    }
+    },
+
   },
   created() {
     this.getCards()

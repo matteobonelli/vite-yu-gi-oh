@@ -5,7 +5,7 @@
         </div>
         <div class="row row-cols-md-5  ">
             <CardPrinter v-for="card in store.cardsList" :image="card.card_images[0].image_url" :name="card.name"
-                :archetype="card.archetype" />
+                :archetype="card.archetype" :key="card.id" />
         </div>
 
 
