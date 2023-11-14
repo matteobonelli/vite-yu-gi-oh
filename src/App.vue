@@ -38,7 +38,6 @@ export default {
     getArchetype(value) {
       if (value) {
         this.params.archetype = value
-        console.log(this.params)
       } else {
         this.params.archetype = null
       }
@@ -55,10 +54,16 @@ export default {
         this.loaded = false
       })
     },
+    getArchetypes() {
+      axios.get(store.archetypesUrl).then((resp) => {
+        store.archetypesList = resp.data
+      })
+    }
 
   },
   created() {
     this.getCards()
+    this.getArchetypes()
   }
 }
 </script>
